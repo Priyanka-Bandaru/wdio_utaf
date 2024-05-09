@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    tools {
-        nodejs 'node'
+    tools{
+      nodejs 'node'
     }
     stages {
         stage('Build') {
@@ -18,10 +18,11 @@ pipeline {
                 }
             }
         }
-        stage('Generate HTML report') {
-            steps {
-                cucumber-reports fileIncludePattern: '**/*.json'
-            }
+        
+    }
+    post {
+        always {
+           archiveArtifacts artifacts: '.tmp/report/**/*', allowEmptyArchive: true
         }
     }
 }
