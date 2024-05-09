@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Generate HTML report') {
             steps {
-                cucumber-reports fileIncludePattern: '**/*.json', sortingMethod: 'ALPHABETICAL', trendsLimit: 10, classifications: [[key: 'Browser', value: 'Firefox']]
+                cucumber-reports fileIncludePattern: '**/*.json'
             }
         }
     }
