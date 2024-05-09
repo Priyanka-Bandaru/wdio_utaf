@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    tools{
+      nodejs 'node'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: '
+https://github.com/AkashHN/wdio_bdd_utaf.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    bat 'npm install --force'
+                }
+            }
+        }
+        stage('Execute') {
+            steps {
+                script {
+                    bat 'npm run UI'
+                }
+            }
+        }
+    }
+    post {
+        always {
+           archiveArtifacts artifacts: '.tmp/report/**/*', allowEmptyArchive: true
+        }
+    }
+}
