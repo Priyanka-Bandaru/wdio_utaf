@@ -21,7 +21,7 @@ pipeline {
     }
     post {
         always {
-           archiveArtifacts artifacts: '.tmp/report/**/*', allowEmptyArchive: true
+           archiveArtifacts artifacts: '.tmp/report/index.html', allowEmptyArchive: true
         }
     }
 }
