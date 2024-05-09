@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    tools{
-      nodejs 'node'
+    tools {
+        nodejs 'node'
     }
     stages {
         stage('Build') {
@@ -19,17 +19,9 @@ pipeline {
             }
         }
         stage('Generate HTML report') {
-        cucumber buildStatus: 'UNSTABLE',
-                reportTitle: 'My report',
-                fileIncludePattern: '**/*.json',
-                trendsLimit: 10,
-                classifications: [
-                    [
-                        'key': 'Browser',
-                        'value': 'Firefox'
-                    ]
-                ]
+            steps {
+                cucumber-reports fileIncludePattern: '**/*.json', sortingMethod: 'ALPHABETICAL', trendsLimit: 10, classifications: [[key: 'Browser', value: 'Firefox']]
+            }
+        }
     }
-    }
-   
 }
